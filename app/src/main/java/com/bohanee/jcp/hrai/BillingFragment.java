@@ -10,17 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 public class BillingFragment extends Fragment implements CameraFragment.OnChildFragmentInteractionListener {
 
-    private OnFragmentInteractionListener mListener;
     FragmentTransaction fragmentTransactionB;
-    private Button cancelButton,proceedButton,fastForwardButton;
+    private OnFragmentInteractionListener mListener;
+    private Button cancelButton, proceedButton, fastForwardButton;
     private EditText discountAmtEdt, discountPercentEdt;
+    private SwitchCompat camSwitch;
+    private FrameLayout frameLayout;
+    private EditText addUPCEdt;
+    private ImageButton addUPCButton;
+    private Fragment childFragment;
+    private FragmentTransaction transaction;
 
 
     @Override
@@ -38,8 +48,12 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
         cancelButton = view.findViewById(R.id.btn_cancel);
         proceedButton = view.findViewById(R.id.btn_proceed);
         fastForwardButton = view.findViewById(R.id.btn_fast_forward);
-        discountAmtEdt=view.findViewById(R.id.discount_amt_et);
-        discountPercentEdt=view.findViewById(R.id.discount_percent_et);
+        discountAmtEdt = view.findViewById(R.id.discount_amt_et);
+        discountPercentEdt = view.findViewById(R.id.discount_percent_et);
+        camSwitch = view.findViewById(R.id.cam_switch);
+        frameLayout = view.findViewById(R.id.fragment_container);
+        addUPCButton = view.findViewById(R.id.add_img_btn);
+        addUPCEdt = view.findViewById(R.id.add_upc_edt);
 
         discountAmtEdt.setText("₹");
         Selection.setSelection(discountAmtEdt.getText(), discountAmtEdt.getText().length());
@@ -62,14 +76,13 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!s.toString().startsWith("₹")){
+                if (!s.toString().startsWith("₹")) {
                     discountAmtEdt.setText("₹");
                     Selection.setSelection(discountAmtEdt.getText(), discountAmtEdt.getText().length());
 
                 }
 
             }
-
 
 
         });
@@ -95,15 +108,14 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!s.toString().endsWith("%")){
+                if (!s.toString().endsWith("%")) {
                     discountPercentEdt.setText("%");
                     Selection.setSelection(discountPercentEdt.getText(), discountPercentEdt.getText().length());
 
                 }
 
             }
-            });
-
+        });
 
 
         proceedButton.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +134,29 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
             }
         });
 
+        //camera switch implementation
+
+        camSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    frameLayout.setVisibility(View.VISIBLE);
+                    addUPCEdt.setVisibility(View.INVISIBLE);
+                    addUPCButton.setVisibility(View.INVISIBLE);
+
+                    childFragment = new CameraFragment();
+                    transaction = getChildFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragmentContainerForCameraBILLING, childFragment).commit();
+                } else {
+                    transaction = getChildFragmentManager().beginTransaction();
+                    transaction.remove(childFragment).commit();
+                    frameLayout.setVisibility(View.INVISIBLE);
+                    addUPCEdt.setVisibility(View.VISIBLE);
+                    addUPCButton.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
         return view;
     }
@@ -131,13 +166,9 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
 
     }
 
-    public interface OnFragmentInteractionListener {
-        void messageFromParentFragmentToActivity(String myString);
-    }
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Fragment childFragment = new CameraFragment();
+        childFragment = new CameraFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerForCameraBILLING, childFragment).commit();
     }
@@ -151,5 +182,9 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void messageFromParentFragmentToActivity(String myString);
     }
 }
