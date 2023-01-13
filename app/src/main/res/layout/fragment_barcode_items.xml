@@ -11,6 +11,8 @@
         android:id="@+id/fragmentContainerForCameraBARCODE"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_marginTop="23dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,11 +29,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/add_upc_edt"
+        android:id="@+id/bar_add_upc_edt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="89dp"
         android:background="@drawable/grey_rounded_edittext"
         android:ems="10"
         android:hint="Add UPC number"
@@ -39,16 +41,14 @@
         android:minHeight="48dp"
         android:padding="6dp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/add_img_btn"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/bar_add_img_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/add_img_btn"
+        android:id="@+id/bar_add_img_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
         android:layout_marginEnd="36dp"
         android:backgroundTint="@color/bohanee_red_3"
         android:contentDescription="Add current UPC number"
@@ -56,9 +56,8 @@
         android:src="@drawable/ic_baseline_add_24"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cam_imgview"
-        app:layout_constraintTop_toTopOf="@id/add_upc_edt" />
+        app:layout_constraintStart_toEndOf="@id/bar_add_upc_edt"
+        app:layout_constraintTop_toTopOf="@+id/bar_add_upc_edt" />
 
     <TextView
         android:id="@+id/tap_to_scan_tv"
@@ -76,11 +75,12 @@
         app:layout_constraintTop_toBottomOf="@+id/cam_imgview" />
 
     <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/cam_switch"
+        android:id="@+id/barcode_cam_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:checked="true"
         android:minHeight="48dp"
         android:text="Camera"
         android:thumb="@drawable/custom_thumb"
@@ -148,7 +148,7 @@
         app:layout_constraintBottom_toTopOf="@+id/barcode_add_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cam_switch"
+        app:layout_constraintTop_toBottomOf="@+id/barcode_cam_switch"
         tools:listitem="@layout/list_item_barcode_items">
 
     </androidx.recyclerview.widget.RecyclerView>

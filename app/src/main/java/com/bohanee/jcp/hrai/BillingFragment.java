@@ -18,10 +18,18 @@ import android.widget.ImageButton;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bohanee.jcp.hrai.database.Product;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BillingFragment extends Fragment implements CameraFragment.OnChildFragmentInteractionListener {
 
     FragmentTransaction fragmentTransactionB;
+    private BillingRVAdapter adapter;
     private OnFragmentInteractionListener mListener;
     private Button cancelButton, proceedButton, fastForwardButton;
     private EditText discountAmtEdt, discountPercentEdt;
@@ -41,8 +49,7 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_billing, container, false);
         cancelButton = view.findViewById(R.id.btn_cancel);
@@ -50,8 +57,8 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
         fastForwardButton = view.findViewById(R.id.btn_fast_forward);
         discountAmtEdt = view.findViewById(R.id.discount_amt_et);
         discountPercentEdt = view.findViewById(R.id.discount_percent_et);
-        camSwitch = view.findViewById(R.id.cam_switch);
-        frameLayout = view.findViewById(R.id.fragment_container);
+        camSwitch = view.findViewById(R.id.billing_cam_switch);
+        frameLayout = view.findViewById(R.id.fragmentContainerForCameraBILLING);
         addUPCButton = view.findViewById(R.id.add_img_btn);
         addUPCEdt = view.findViewById(R.id.add_upc_edt);
 
@@ -68,8 +75,7 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // TODO Auto-generated method stub
 
             }
@@ -100,8 +106,7 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // TODO Auto-generated method stub
 
             }
@@ -157,6 +162,22 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
             }
         });
 
+        RecyclerView recyclerView = view.findViewById(R.id.items_rv);
+
+
+        List<Product> arrayList = new ArrayList<>();
+        arrayList.add(new Product("Tinder Joy", 50, 56));
+        arrayList.add(new Product("Tinder Joy", 50, 56));
+        arrayList.add(new Product("Tinder Joy", 50, 56));
+        arrayList.add(new Product("Tinder Joy", 50, 56));
+        arrayList.add(new Product("Tinder Joy", 50, 56));
+        arrayList.add(new Product("Tinder Joy", 50, 56));
+        arrayList.add(new Product("Tinder Joy", 50, 56));
+        arrayList.add(new Product("Tinder Joy", 50, 56));
+        adapter = new BillingRVAdapter(arrayList);
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setAdapter(adapter);
 
         return view;
     }

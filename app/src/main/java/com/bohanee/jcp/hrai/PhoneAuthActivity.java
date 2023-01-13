@@ -3,8 +3,11 @@ package com.bohanee.jcp.hrai;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -110,6 +113,12 @@ public class PhoneAuthActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         referenceVariables();
+        cursorMovingFunction(OTP1, OTP2, OTP1);
+        cursorMovingFunction(OTP2, OTP3, OTP1);
+        cursorMovingFunction(OTP3, OTP4, OTP2);
+        cursorMovingFunction(OTP4, OTP5, OTP3);
+        cursorMovingFunction(OTP5, OTP6, OTP4);
+        cursorMovingFunction(OTP6, OTP6, OTP5);
 
         // setting onclick listener for generate OTP button.
         signInBtn.setOnClickListener(new View.OnClickListener() {
@@ -282,5 +291,39 @@ public class PhoneAuthActivity extends AppCompatActivity {
         loadingImg = findViewById(R.id.loading_img);
         bohaneeImg = findViewById(R.id.bohanee_img);
     }
+    private void cursorMovingFunction(EditText currentEditText, EditText nextEditText, EditText previousEditText){
+        currentEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(currentEditText.getText().toString().trim().length()==0){
+                    currentEditText.clearFocus();
+                    previousEditText.requestFocus();
+                }
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (currentEditText.getText().toString().trim().length() ==1) {
+                    currentEditText.clearFocus();
+                    nextEditText.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        currentEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL && currentEditText.getText().toString().trim().length() ==0) {
+                    currentEditText.clearFocus();
+                    previousEditText.requestFocus();
+                }
+                return false;
+            }
+        });
+    }
 }
