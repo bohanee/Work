@@ -14,7 +14,7 @@
         android:padding="26dp"
         tools:context=".BillingFragment">
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerForCameraBILLING"
             android:layout_width="300dp"
             android:layout_height="300dp"

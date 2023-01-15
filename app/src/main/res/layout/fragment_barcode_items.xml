@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".BarcodeItemsFragment">
 
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerForCameraBARCODE"
         android:layout_width="300dp"
         android:layout_height="300dp"
