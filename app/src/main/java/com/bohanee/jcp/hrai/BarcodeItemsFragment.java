@@ -95,7 +95,6 @@ public class BarcodeItemsFragment extends Fragment implements CameraFragment.OnC
                     addUPCEdt.setVisibility(View.INVISIBLE);
                     addUPCButton.setVisibility(View.INVISIBLE);
 
-                    childFragment = new CameraFragment();
                     transaction = getChildFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragmentContainerForCameraBARCODE, childFragment).commit();
                 } else {
@@ -121,7 +120,7 @@ public class BarcodeItemsFragment extends Fragment implements CameraFragment.OnC
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Fragment childFragment = new CameraFragment();
+        childFragment = new CameraFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerForCameraBARCODE, childFragment).commit();
     }

@@ -149,7 +149,6 @@ public class BillingFragment extends Fragment implements CameraFragment.OnChildF
                     addUPCEdt.setVisibility(View.INVISIBLE);
                     addUPCButton.setVisibility(View.INVISIBLE);
 
-                    childFragment = new CameraFragment();
                     transaction = getChildFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragmentContainerForCameraBILLING, childFragment).commit();
                 } else {
