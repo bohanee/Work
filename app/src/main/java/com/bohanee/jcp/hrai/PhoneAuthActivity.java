@@ -136,6 +136,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
                     // if the text field is not empty we are calling our
                     // send OTP method for getting OTP from Firebase.
                     String phone = "+91" + edtPhoneNo.getText().toString();
+                    //ToDo, Collect this phone Data and Send to the activity_create_profile.xml & also Make the Value a Textview Instead... (DB)
                     hideSignInScreen();
                     showOTPScreen();
                     sendVerificationCode(phone);

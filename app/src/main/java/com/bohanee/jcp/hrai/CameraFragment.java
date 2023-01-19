@@ -1,5 +1,5 @@
 package com.bohanee.jcp.hrai;
-
+//CAMERAFRAGMENT
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -20,9 +20,9 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
-/*import org.jsoup.Jsoup;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;*/
+import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 
@@ -55,7 +55,7 @@ public class CameraFragment extends Fragment {
                         Log.v("Dez1","= "+UPC+"");
                         URL = url + UPC;
                         Log.v("Dez2","= "+URL+"");
-                        /*new JSoupInBackground().execute();*/
+                        new JSoupInBackground().execute();
                         Log.v("Dez7","Continue");
                         mCodeScanner.startPreview();
                     }
@@ -65,7 +65,7 @@ public class CameraFragment extends Fragment {
         return v;
     }
 
-/*    //JSoup
+    //JSoup
     public class JSoupInBackground extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... voids) {
@@ -96,7 +96,7 @@ public class CameraFragment extends Fragment {
             //mCodeScanner.startPreview();
             return null;
         }
-    }*/
+    }
 
     @Override
     public void onAttach(Context context) {
