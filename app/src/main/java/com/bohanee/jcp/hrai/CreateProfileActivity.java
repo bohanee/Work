@@ -38,6 +38,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         Name=findViewById(R.id.name_et);
         PhoneNumber=findViewById(R.id.ph_no_et); //ToDo, Receive The Data from PhoneAuthActivity.java and Keep it Locked... (DB)
         saveButton=findViewById(R.id.save_btn);
+
         /*
         //REALTIME
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -64,19 +65,17 @@ public class CreateProfileActivity extends AppCompatActivity {
         PINCode.setValue("411016");
         StoreName = StoreCode.child("STORE-NAME");
         StoreName.setValue("sHOPE");
-        */
 
-        /*
         //FIRESTORE
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference BuisnessCode_PhoneNumber_COLLECTION, StockCOLLECTION;
         DocumentReference EmployeesWaitingForVerificationData, ShopCodeDOCUMENT, TotalBillData, ProductData, CurrentStockTotalData, CurrentStockProductData, StockHistoryProductData;
-        String BuisnessCode_PhoneNumber,
+        String BuisnessCode_PhoneNumberSTRING,
                 SHOPCODE,
                 EMPLOYEE_PhNum, DATE, TIME, HOURS, MIN, CUTOMER_NAME__CUSTOMER_PhNum, PRODUCT_NAME,
                     ItemName,
                     MONTH, DATE_DAY, STOCK_TIME, StockItemName;
-        BuisnessCode_PhoneNumber = "Defined";
+        BuisnessCode_PhoneNumberSTRING = "Defined";
         SHOPCODE = "Defined";
         EMPLOYEE_PhNum = "Defined";
         DATE = "Defined";
@@ -90,7 +89,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         DATE_DAY = "Defined";
         STOCK_TIME = "Defined";
         StockItemName = "Defined";
-        BuisnessCode_PhoneNumber_COLLECTION = db.collection(BuisnessCode_PhoneNumber);
+        BuisnessCode_PhoneNumber_COLLECTION = db.collection(BuisnessCode_PhoneNumberSTRING);
             EmployeesWaitingForVerificationData = BuisnessCode_PhoneNumber_COLLECTION.document("Temp");
             ShopCodeDOCUMENT = BuisnessCode_PhoneNumber_COLLECTION.document(SHOPCODE);
                 TotalBillData = ShopCodeDOCUMENT.collection(EMPLOYEE_PhNum).document(DATE).collection(TIME).document(CUTOMER_NAME__CUSTOMER_PhNum);
@@ -137,6 +136,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         tempemployeedata.put("PHONENUMBER", "EMPLOYEENAME");
         EmployeesWaitingForVerificationData.set(tempemployeedata);
          */
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
