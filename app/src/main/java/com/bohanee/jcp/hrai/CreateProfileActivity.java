@@ -1,18 +1,31 @@
 package com.bohanee.jcp.hrai;
-//CREATEPROFILEACTIVITY
+
+import static android.content.ContentValues.TAG;
+import static java.sql.Types.NULL;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateProfileActivity extends AppCompatActivity {
     EditText Name;
@@ -56,9 +69,74 @@ public class CreateProfileActivity extends AppCompatActivity {
         /*
         //FIRESTORE
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        */
-
-
+        CollectionReference BuisnessCode_PhoneNumber_COLLECTION, StockCOLLECTION;
+        DocumentReference EmployeesWaitingForVerificationData, ShopCodeDOCUMENT, TotalBillData, ProductData, CurrentStockTotalData, CurrentStockProductData, StockHistoryProductData;
+        String BuisnessCode_PhoneNumber,
+                SHOPCODE,
+                EMPLOYEE_PhNum, DATE, TIME, HOURS, MIN, CUTOMER_NAME__CUSTOMER_PhNum, PRODUCT_NAME,
+                    ItemName,
+                    MONTH, DATE_DAY, STOCK_TIME, StockItemName;
+        BuisnessCode_PhoneNumber = "Defined";
+        SHOPCODE = "Defined";
+        EMPLOYEE_PhNum = "Defined";
+        DATE = "Defined";
+            HOURS = "Defined";
+            MIN = "Defined";
+        TIME = "TIME("+HOURS+":"+MIN+")";
+        CUTOMER_NAME__CUSTOMER_PhNum = "Defined";
+        PRODUCT_NAME = "Defined";
+        ItemName = "Defined";
+        MONTH = "Defined";
+        DATE_DAY = "Defined";
+        STOCK_TIME = "Defined";
+        StockItemName = "Defined";
+        BuisnessCode_PhoneNumber_COLLECTION = db.collection(BuisnessCode_PhoneNumber);
+            EmployeesWaitingForVerificationData = BuisnessCode_PhoneNumber_COLLECTION.document("Temp");
+            ShopCodeDOCUMENT = BuisnessCode_PhoneNumber_COLLECTION.document(SHOPCODE);
+                TotalBillData = ShopCodeDOCUMENT.collection(EMPLOYEE_PhNum).document(DATE).collection(TIME).document(CUTOMER_NAME__CUSTOMER_PhNum);
+                    ProductData = TotalBillData.collection("Products").document(PRODUCT_NAME);
+                StockCOLLECTION = ShopCodeDOCUMENT.collection("Stock");
+                    CurrentStockTotalData = StockCOLLECTION.document("Current");
+                        CurrentStockProductData = CurrentStockTotalData.collection("Stocks").document(ItemName);
+                    StockHistoryProductData = StockCOLLECTION.document("Stock-History").collection(MONTH).document(DATE_DAY).collection(STOCK_TIME).document(StockItemName);
+        Map<String, Object> billdata = new HashMap<>();
+        billdata.put("DISCOUNT-MARGIN", 10+"%");
+        billdata.put("PROFIT-MARGIN-AFTER-DISCOUNTS", 15+"%");
+        billdata.put("TOTAL-BILL", 100);
+        billdata.put("TOTAL-BILL-INCLUDING-DISCOUNTED-PRICE", 90);
+        billdata.put("TOTAL-DISCOUNT", 10);
+        billdata.put("TOTAL-PROFIT-AFTER-DISCOUNTS", 25);
+        String upc = "012345678901";
+        TotalBillData.set(billdata);
+        Map<String, Object> productname = new HashMap<>();
+        productname.put("CURRENT-CP", 50);
+        productname.put("CURRENT-SP", 40);
+        productname.put("MARKET-MRP", NULL);
+        productname.put("PROFIT-MADE-%", 25+"%");
+        productname.put("PROFIT-MADE-PER-PRODUCT", 10);
+        productname.put("UPC-NUMBER", upc);
+        String UPC = "012345678901";
+        ProductData.set(productname);
+        Map<String, Object> currentstocks = new HashMap<>();
+        currentstocks.put("Value", "TOTAL-STOCK-VALUE");
+        CurrentStockTotalData.set(currentstocks);
+        Map<String, Object> itemname = new HashMap<>();
+        itemname.put("CP", 15);
+        itemname.put("QTY", 10);
+        itemname.put("SP", 2);
+        itemname.put("UNITS-MESSURE", "Grams");
+        itemname.put("UPC-NUMBER", UPC);
+        CurrentStockProductData.set(itemname);
+        Map<String, Object> ITEMNAME = new HashMap<>();
+        ITEMNAME.put("CostPrice", "TOTALHISTORICALCOSTPRICE");
+        ITEMNAME.put("QTY", 10);
+        ITEMNAME.put("SellingPrice", "TOTALHISTORICALSELLINGPRICE");
+        ITEMNAME.put("TOTAL_VALUE", 1000);
+        StockHistoryProductData.set(ITEMNAME);
+        Map<String, Object> tempemployeedata = new HashMap<>();
+        tempemployeedata.put("PHONENUMBER", "EMPLOYEENAME");
+        EmployeesWaitingForVerificationData.set(tempemployeedata);
+         */
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
