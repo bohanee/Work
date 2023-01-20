@@ -42,8 +42,10 @@ public class CreateProfileActivity extends AppCompatActivity {
         /*
         //REALTIME
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         String ShopNumberINT, EmployeeNumberINT, ActualEmployeePhoneNumbers;
         DatabaseReference Shops, BuisnessCode_PhoneNumber, BuisnessManName,ShopNumberRef, StoreCode, Address, EmailID, Employees,EmployeeNumberRef, PhNum_EmployeeName, PINCode, StoreName;
+
         Shops = database.getReference("Shops");
             BuisnessCode_PhoneNumber = Shops.child("8111952240_BUISNESS-CODE");
                 BuisnessManName = BuisnessCode_PhoneNumber.child("NAME");
@@ -68,13 +70,15 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         //FIRESTORE
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference BuisnessCode_PhoneNumber_COLLECTION, StockCOLLECTION;
-        DocumentReference EmployeesWaitingForVerificationData, ShopCodeDOCUMENT, TotalBillData, ProductData, CurrentStockTotalData, CurrentStockProductData, StockHistoryProductData;
+
         String BuisnessCode_PhoneNumberSTRING,
                 SHOPCODE,
                 EMPLOYEE_PhNum, DATE, TIME, HOURS, MIN, CUTOMER_NAME__CUSTOMER_PhNum, PRODUCT_NAME,
-                    ItemName,
-                    MONTH, DATE_DAY, STOCK_TIME, StockItemName;
+                ItemName,
+                MONTH, DATE_DAY, STOCK_TIME, StockItemName;
+        CollectionReference BuisnessCode_PhoneNumber_COLLECTION, StockCOLLECTION;
+        DocumentReference EmployeesWaitingForVerificationData, ShopCodeDOCUMENT, TotalBillData, ProductData, CurrentStockTotalData, CurrentStockProductData, StockHistoryProductData;
+
         BuisnessCode_PhoneNumberSTRING = "Defined";
         SHOPCODE = "Defined";
         EMPLOYEE_PhNum = "Defined";
@@ -89,6 +93,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         DATE_DAY = "Defined";
         STOCK_TIME = "Defined";
         StockItemName = "Defined";
+
         BuisnessCode_PhoneNumber_COLLECTION = db.collection(BuisnessCode_PhoneNumberSTRING);
             EmployeesWaitingForVerificationData = BuisnessCode_PhoneNumber_COLLECTION.document("Temp");
             ShopCodeDOCUMENT = BuisnessCode_PhoneNumber_COLLECTION.document(SHOPCODE);
@@ -98,42 +103,48 @@ public class CreateProfileActivity extends AppCompatActivity {
                     CurrentStockTotalData = StockCOLLECTION.document("Current");
                         CurrentStockProductData = CurrentStockTotalData.collection("Stocks").document(ItemName);
                     StockHistoryProductData = StockCOLLECTION.document("Stock-History").collection(MONTH).document(DATE_DAY).collection(STOCK_TIME).document(StockItemName);
+
         Map<String, Object> billdata = new HashMap<>();
-        billdata.put("DISCOUNT-MARGIN", 10+"%");
-        billdata.put("PROFIT-MARGIN-AFTER-DISCOUNTS", 15+"%");
-        billdata.put("TOTAL-BILL", 100);
-        billdata.put("TOTAL-BILL-INCLUDING-DISCOUNTED-PRICE", 90);
-        billdata.put("TOTAL-DISCOUNT", 10);
-        billdata.put("TOTAL-PROFIT-AFTER-DISCOUNTS", 25);
-        String upc = "012345678901";
+            billdata.put("DISCOUNT-MARGIN", 10+"%");
+            billdata.put("PROFIT-MARGIN-AFTER-DISCOUNTS", 15+"%");
+            billdata.put("TOTAL-BILL", 100);
+            billdata.put("TOTAL-BILL-INCLUDING-DISCOUNTED-PRICE", 90);
+            billdata.put("TOTAL-DISCOUNT", 10);
+            billdata.put("TOTAL-PROFIT-AFTER-DISCOUNTS", 25);
         TotalBillData.set(billdata);
+
+        String upc = "012345678901";
         Map<String, Object> productname = new HashMap<>();
-        productname.put("CURRENT-CP", 50);
-        productname.put("CURRENT-SP", 40);
-        productname.put("MARKET-MRP", NULL);
-        productname.put("PROFIT-MADE-%", 25+"%");
-        productname.put("PROFIT-MADE-PER-PRODUCT", 10);
-        productname.put("UPC-NUMBER", upc);
-        String UPC = "012345678901";
+            productname.put("CURRENT-CP", 50);
+            productname.put("CURRENT-SP", 40);
+            productname.put("MARKET-MRP", NULL);
+            productname.put("PROFIT-MADE-%", 25+"%");
+            productname.put("PROFIT-MADE-PER-PRODUCT", 10);
+            productname.put("UPC-NUMBER", upc);
         ProductData.set(productname);
+
+        String UPC = "012345678901";
         Map<String, Object> currentstocks = new HashMap<>();
-        currentstocks.put("Value", "TOTAL-STOCK-VALUE");
+            currentstocks.put("Value", "TOTAL-STOCK-VALUE");
         CurrentStockTotalData.set(currentstocks);
+
         Map<String, Object> itemname = new HashMap<>();
-        itemname.put("CP", 15);
-        itemname.put("QTY", 10);
-        itemname.put("SP", 2);
-        itemname.put("UNITS-MESSURE", "Grams");
-        itemname.put("UPC-NUMBER", UPC);
+            itemname.put("CP", 15);
+            itemname.put("QTY", 10);
+            itemname.put("SP", 2);
+            itemname.put("UNITS-MESSURE", "Grams");
+            itemname.put("UPC-NUMBER", UPC);
         CurrentStockProductData.set(itemname);
+
         Map<String, Object> ITEMNAME = new HashMap<>();
-        ITEMNAME.put("CostPrice", "TOTALHISTORICALCOSTPRICE");
-        ITEMNAME.put("QTY", 10);
-        ITEMNAME.put("SellingPrice", "TOTALHISTORICALSELLINGPRICE");
-        ITEMNAME.put("TOTAL_VALUE", 1000);
+            ITEMNAME.put("CostPrice", "TOTALHISTORICALCOSTPRICE");
+            ITEMNAME.put("QTY", 10);
+            ITEMNAME.put("SellingPrice", "TOTALHISTORICALSELLINGPRICE");
+            ITEMNAME.put("TOTAL_VALUE", 1000);
         StockHistoryProductData.set(ITEMNAME);
+
         Map<String, Object> tempemployeedata = new HashMap<>();
-        tempemployeedata.put("PHONENUMBER", "EMPLOYEENAME");
+            tempemployeedata.put("PHONENUMBER", "EMPLOYEENAME");
         EmployeesWaitingForVerificationData.set(tempemployeedata);
          */
 
