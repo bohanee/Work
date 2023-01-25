@@ -1,43 +1,29 @@
 package com.bohanee.jcp.hrai;
 
-import static android.content.ContentValues.TAG;
-import static java.sql.Types.NULL;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CreateProfileActivity extends AppCompatActivity {
-    EditText Name;
-    TextView PhoneNumber;
+    EditText name;
+    TextView phoneNumber;
     Button saveButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
-        Name=findViewById(R.id.name_et);
-        PhoneNumber=findViewById(R.id.ph_no_et); //ToDo, Receive The Data from PhoneAuthActivity.java and Keep it Locked... (DB)
-        saveButton=findViewById(R.id.save_btn);
+        name = findViewById(R.id.name_et);
+        phoneNumber = findViewById(R.id.ph_no_tv);
+        saveButton = findViewById(R.id.save_btn);
+
+        int receivedPhoneNo =this.getIntent().getIntExtra(PhoneAuthActivity.USER_PHONE_NUMBER, 0);
+        phoneNumber.setText(receivedPhoneNo);
 
         /*
         //REALTIME

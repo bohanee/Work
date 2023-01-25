@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PhoneAuthActivity extends AppCompatActivity {
     private static final String TAG = "PhoneAuthActivity";
+    public static final String USER_PHONE_NUMBER = "user_phone_number";
     // variable for FirebaseAuth class
     private FirebaseAuth mAuth;
     // variable for our text input
@@ -136,6 +137,11 @@ public class PhoneAuthActivity extends AppCompatActivity {
                     // if the text field is not empty we are calling our
                     // send OTP method for getting OTP from Firebase.
                     String phone = "+91" + edtPhoneNo.getText().toString();
+
+                    Intent intent = new Intent(PhoneAuthActivity.this, CreateProfileActivity.class);
+                        intent.putExtra(USER_PHONE_NUMBER, phone);
+                        startActivity(intent);
+
                     //ToDo, Collect this phone Data and Send to the CreateProfileActivity.java ... (DB)
                     hideSignInScreen();
                     showOTPScreen();
