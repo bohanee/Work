@@ -11,18 +11,18 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Product.class}, version = 1, exportSchema = false)
-public abstract class TempDatabase extends RoomDatabase {
+@Database(entities = {Product.class, User.class}, version = 1, exportSchema = false)
+public abstract class AppDatabase extends RoomDatabase {
     private static final Object LOCK = new Object();
     private static final String  DATABASE_NAME = "productList";
     private static final String TAG = "TempDatabase";
-    public static TempDatabase sInstance;
+    public static AppDatabase sInstance;
 
-    public static TempDatabase getInstance(Context context) {
+    public static AppDatabase getInstance(Context context) {
         if (sInstance == null) {
             synchronized (LOCK) {
                 Log.d(TAG, "getInstance: Creating new database...");
-                sInstance= Room.databaseBuilder(context, TempDatabase.class, TempDatabase.DATABASE_NAME)
+                sInstance= Room.databaseBuilder(context, AppDatabase.class, AppDatabase.DATABASE_NAME)
                         .allowMainThreadQueries()
                         .build();
             }
@@ -33,5 +33,5 @@ public abstract class TempDatabase extends RoomDatabase {
 
     }
 
-//    public abstract ProductDao productDao();
+    public abstract UserDao userDao();
 }

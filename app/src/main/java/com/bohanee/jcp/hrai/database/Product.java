@@ -1,9 +1,16 @@
 package com.bohanee.jcp.hrai.database;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 /**
  * Created by Shivanshu Raj on 09-10-2022.
  */
+@Entity
 public class Product {
+    @PrimaryKey@NonNull
     private String productName;
     private int cp;
     private int sp;
@@ -15,6 +22,7 @@ public class Product {
         this.quantity = quantity;
     }
 
+    @Ignore
     public Product(String productName, int cp, int sp, int quantity) {
         this.productName = productName;
         this.cp = cp;

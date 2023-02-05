@@ -9,10 +9,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bohanee.jcp.hrai.database.AppDatabase;
+import com.bohanee.jcp.hrai.database.User;
+
 public class CreateProfileActivity extends AppCompatActivity {
     EditText name;
     TextView phoneNumber;
     Button saveButton;
+    AppDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +26,11 @@ public class CreateProfileActivity extends AppCompatActivity {
         name = findViewById(R.id.name_et);
         phoneNumber = findViewById(R.id.ph_no_tv);
         saveButton = findViewById(R.id.save_btn);
+        db = AppDatabase.getInstance(this);
 
-        int receivedPhoneNo =this.getIntent().getIntExtra(PhoneAuthActivity.USER_PHONE_NUMBER, 0);
-        phoneNumber.setText(receivedPhoneNo);
+        User returnedUser =db.userDao().loadUserById(0);
+        phoneNumber.setText(returnedUser.getPhoneNo());
+
 
         /*
         //REALTIME
@@ -138,8 +145,10 @@ public class CreateProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //ToDo, Send The Data into a Package (DB)...
-                /*String name = Name.getText().toString();
-                String phNo = PhoneNumber.getText().toString();*/
+                String receivedName = name.getText().toString();
+                String receivedPhNo = phoneNumber.getText().toString();
+                User user = new User(receivedPhNo);
+
                 Intent intent = new Intent(CreateProfileActivity.this, JoinBusinessActivity.class);
                 startActivity(intent);
             }

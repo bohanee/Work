@@ -18,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bohanee.jcp.hrai.database.AppDatabase;
+import com.bohanee.jcp.hrai.database.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -31,9 +33,10 @@ import java.util.concurrent.TimeUnit;
 
 public class PhoneAuthActivity extends AppCompatActivity {
     private static final String TAG = "PhoneAuthActivity";
-    public static final String USER_PHONE_NUMBER = "user_phone_number";
     // variable for FirebaseAuth class
     private FirebaseAuth mAuth;
+    private AppDatabase db;
+    public static User user;
     // variable for our text input
     // field for phone and OTP.
     private EditText edtPhoneNo, OTP1, OTP2, OTP3, OTP4, OTP5, OTP6;
@@ -113,6 +116,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
         // of our FirebaseAuth.
         mAuth = FirebaseAuth.getInstance();
 
+        db=AppDatabase.getInstance(this);
         referenceVariables();
         cursorMovingFunction(OTP1, OTP2, OTP1);
         cursorMovingFunction(OTP2, OTP3, OTP1);
@@ -136,11 +140,12 @@ public class PhoneAuthActivity extends AppCompatActivity {
                 } else {
                     // if the text field is not empty we are calling our
                     // send OTP method for getting OTP from Firebase.
-                    String phone = "+91" + edtPhoneNo.getText().toString();
+                    String phone = "+91 " + edtPhoneNo.getText();
+                    user = new User(phone);
+                    db.userDao().deleteTable();
+                    db.userDao().insertUser(user);
+//                    User returnedUser=db.userDao().loadUserById(user.getId());
 
-                    Intent intent = new Intent(PhoneAuthActivity.this, CreateProfileActivity.class);
-                        intent.putExtra(USER_PHONE_NUMBER, phone);
-                        startActivity(intent);
 
                     //ToDo, Collect this phone Data and Send to the CreateProfileActivity.java ... (DB)
                     hideSignInScreen();
