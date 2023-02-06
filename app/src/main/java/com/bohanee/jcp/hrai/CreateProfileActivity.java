@@ -148,7 +148,9 @@ public class CreateProfileActivity extends AppCompatActivity {
                 //ToDo, Send The Data into a Package (DB)...
                 String receivedName = name.getText().toString();
                 String receivedPhNo = phoneNumber.getText().toString();
-                User user = new User(receivedPhNo);
+
+                User user = new User(receivedName, receivedPhNo);
+                insertUserToDb(user);
 
                 Intent intent = new Intent(CreateProfileActivity.this, JoinBusinessActivity.class);
                 startActivity(intent);
@@ -160,7 +162,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
             @Override
             public void run() {
-                User returnedUser =db.userDao().loadUserById(0);
+                User returnedUser = db.userDao().loadUserById(0);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -174,4 +176,12 @@ public class CreateProfileActivity extends AppCompatActivity {
 
     }
 
+    private void insertUserToDb(User user) {
+        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                db.userDao().insertUser(user);
+            }
+        });
+    }
 }
