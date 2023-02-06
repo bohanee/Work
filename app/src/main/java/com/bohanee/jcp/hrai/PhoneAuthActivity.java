@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bohanee.jcp.hrai.database.AppDatabase;
+import com.bohanee.jcp.hrai.database.AppExecutors;
 import com.bohanee.jcp.hrai.database.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,7 +49,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
     private Button signInBtn, verifyOTPBtn;
 
     // string for storing our verification ID; fullOTP string combines the text of all OTP edittext boxes.
-    private String verificationId, fullOTP;
+    private String verificationId,fullOTP;
     // callback method is called on Phone auth provider.
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
@@ -141,12 +142,9 @@ public class PhoneAuthActivity extends AppCompatActivity {
                     // if the text field is not empty we are calling our
                     // send OTP method for getting OTP from Firebase.
                     String phone = "+91 " + edtPhoneNo.getText();
+
                     user = new User(phone);
-                    db.userDao().deleteTable();
-                    db.userDao().insertUser(user);
-//                    User returnedUser=db.userDao().loadUserById(user.getId());
-
-
+                    insertUsertoDb();
                     //ToDo, Collect this phone Data and Send to the CreateProfileActivity.java ... (DB)
                     hideSignInScreen();
                     showOTPScreen();
@@ -281,6 +279,15 @@ public class PhoneAuthActivity extends AppCompatActivity {
         OTP6.setVisibility(View.INVISIBLE);
     }
 
+    void insertUsertoDb(){
+        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                db.userDao().deleteTable();
+                db.userDao().insertUser(user);
+            }
+        });
+    }
     //method that references views by calling their respective findViewByIds.
     private void referenceVariables() {
         edtPhoneNo = findViewById(R.id.editTextPhoneNo);

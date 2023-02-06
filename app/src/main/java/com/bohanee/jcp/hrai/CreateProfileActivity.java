@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bohanee.jcp.hrai.database.AppDatabase;
+import com.bohanee.jcp.hrai.database.AppExecutors;
 import com.bohanee.jcp.hrai.database.User;
 
 public class CreateProfileActivity extends AppCompatActivity {
@@ -28,8 +29,8 @@ public class CreateProfileActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.save_btn);
         db = AppDatabase.getInstance(this);
 
-        User returnedUser =db.userDao().loadUserById(0);
-        phoneNumber.setText(returnedUser.getPhoneNo());
+
+        loadUserFromDb();
 
 
         /*
@@ -154,4 +155,23 @@ public class CreateProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void loadUserFromDb() {
+        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                User returnedUser =db.userDao().loadUserById(0);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        phoneNumber.setText(returnedUser.getPhoneNo());
+
+                    }
+                });
+            }
+        });
+
+
+    }
+
 }
