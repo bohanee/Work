@@ -251,8 +251,9 @@ public class PhoneAuthActivity extends AppCompatActivity {
         verificationTV.setVisibility(View.VISIBLE);
         OTPImg.setVisibility(View.VISIBLE);
         enterOTPTV.setVisibility(View.VISIBLE);
-        loadingImg.setVisibility(View.VISIBLE);
-        waitingTV.setVisibility(View.VISIBLE);
+        // We don't want to show Waiting for OTP since it doesn't make sense after OTP has been received.
+//        loadingImg.setVisibility(View.VISIBLE);
+//        waitingTV.setVisibility(View.VISIBLE);
         verifyOTPBtn.setVisibility(View.VISIBLE);
         OTP1.setVisibility(View.VISIBLE);
         OTP2.setVisibility(View.VISIBLE);
@@ -268,8 +269,8 @@ public class PhoneAuthActivity extends AppCompatActivity {
         verificationTV.setVisibility(View.INVISIBLE);
         OTPImg.setVisibility(View.INVISIBLE);
         enterOTPTV.setVisibility(View.INVISIBLE);
-        loadingImg.setVisibility(View.INVISIBLE);
-        waitingTV.setVisibility(View.INVISIBLE);
+//        loadingImg.setVisibility(View.INVISIBLE);
+//        waitingTV.setVisibility(View.INVISIBLE);
         verifyOTPBtn.setVisibility(View.INVISIBLE);
         OTP1.setVisibility(View.INVISIBLE);
         OTP2.setVisibility(View.INVISIBLE);

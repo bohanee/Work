@@ -10,17 +10,9 @@ import androidx.room.PrimaryKey;
 @Entity
 public class User {
     @PrimaryKey
-    private int id=0;
+    private int id;
     private String phoneNo;
-    private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public User(int id, String phoneNo) {
         this.id = id;
@@ -32,11 +24,6 @@ public class User {
         this.phoneNo = phoneNo;
     }
 
-    @Ignore
-    public User(String phoneNo, String name) {
-        this.phoneNo = phoneNo;
-        this.name = name;
-    }
 
     public int getId() {
         return id;
