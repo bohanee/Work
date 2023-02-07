@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bohanee.jcp.hrai.database.AppDatabase;
 import com.bohanee.jcp.hrai.database.AppExecutors;
 import com.bohanee.jcp.hrai.database.User;
+import com.bohanee.jcp.hrai.database.UserWithName;
 
 public class CreateProfileActivity extends AppCompatActivity {
     EditText name;
@@ -149,8 +150,8 @@ public class CreateProfileActivity extends AppCompatActivity {
                 String receivedName = name.getText().toString();
                 String receivedPhNo = phoneNumber.getText().toString();
 
-                User user = new User(receivedName, receivedPhNo);
-                insertUserToDb(user);
+                UserWithName userWithName = new UserWithName(receivedName, receivedPhNo);
+                insertUserToDb(userWithName);
 
                 Intent intent = new Intent(CreateProfileActivity.this, JoinBusinessActivity.class);
                 startActivity(intent);
@@ -176,11 +177,11 @@ public class CreateProfileActivity extends AppCompatActivity {
 
     }
 
-    private void insertUserToDb(User user) {
+    private void insertUserToDb(UserWithName userWithName) {
         AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
             @Override
             public void run() {
-                db.userDao().insertUser(user);
+                db.userWithNameDao().insertUserWithName(userWithName);
             }
         });
     }
