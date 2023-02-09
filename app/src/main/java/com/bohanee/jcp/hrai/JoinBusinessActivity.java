@@ -26,9 +26,9 @@ public class JoinBusinessActivity extends AppCompatActivity {
         DatabaseReference myRef = dbREALTIME.getReference("Shops");
         DatabaseReference myRefBusinessCode = myRef.child(PhoneNumberBusinessMan);
         DatabaseReference myRefStoreCode = myRefBusinessCode.child(""+Number+"").child("StoreCode");
-        DatabaseReference myRefEmployees = myRefStoreCode.child("Employees");
+        DatabaseReference myRefEmployees = myRefStoreCode.child("Employees");*/
         Button setupBusiness= findViewById(R.id.pending_approvals_btn);
-        Button joinBusiness= findViewById(R.id.multi_store_btn);*/
+        Button joinBusiness= findViewById(R.id.multi_store_btn);
         setupBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
